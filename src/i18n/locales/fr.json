@@ -1,0 +1,184 @@
+{
+  "header": {
+    "home": "Accueil",
+    "services": "Services",
+    "schedule": "Horaires",
+    "testimonials": "Témoignages",
+    "contact": "Contact",
+    "bookNow": "Réserver"
+  },
+  "hero": {
+    "title": "Coach Ibra",
+    "tagline": "Prenez soin de votre corps, c'est le seul endroit où vous êtes obligé de vivre",
+    "personalTraining": "Entraînement Personnel",
+    "groupClasses": "Cours Collectifs",
+    "kidsProgram": "Programme Enfants"
+  },
+  "services": {
+    "title": "Nos Services",
+    "subtitle": "Coach Ibra propose une variété de programmes d'entraînement pour vous aider à atteindre vos objectifs de fitness, que vous recherchiez une attention personnelle, une motivation de groupe ou des programmes pour vos enfants.",
+    "personalTraining": {
+      "title": "Entraînement Personnel",
+      "description": "Séances d'entraînement individuelles adaptées à vos objectifs et besoins spécifiques.",
+      "pricing": [
+        "Séance unique: 60€",
+        "Forfait 5 séances: 275€ (55€/séance)",
+        "Forfait 10 séances: 500€ (50€/séance)",
+        "Mensuel illimité (3x/semaine): 550€"
+      ],
+      "viewPricing": "Voir les tarifs"
+    },
+    "groupClasses": {
+      "title": "Cours Collectifs",
+      "description": "Séances de groupe dynamiques axées sur les techniques de boxe, le conditionnement et l'esprit d'équipe.",
+      "pricing": [
+        "Cours à l'unité: 25€",
+        "Carte 5 cours: 110€ (22€/cours)",
+        "Carte 10 cours: 200€ (20€/cours)",
+        "Mensuel illimité: 220€"
+      ],
+      "viewPricing": "Voir les tarifs"
+    },
+    "kidsProgram": {
+      "title": "Programme Enfants",
+      "description": "Cours de boxe amusants et engageants spécialement conçus pour les enfants de 7 à 14 ans.",
+      "pricing": [
+        "Cours unique: 20€",
+        "Carte 5 cours: 90€ (18€/cours)",
+        "Carte 10 cours: 160€ (16€/cours)",
+        "Mensuel illimité (2x/semaine): 150€"
+      ],
+      "viewPricing": "Voir les tarifs"
+    }
+  },
+  "schedule": {
+    "title": "Planning Hebdomadaire",
+    "subtitle": "Trouvez le cours parfait qui correspond à votre emploi du temps. Filtrez par type de programme et inscrivez-vous directement.",
+    "filterBy": "Filtrer par:",
+    "allClasses": "Tous les cours",
+    "personalTraining": "Entraînement Personnel",
+    "groupClasses": "Cours Collectifs",
+    "kidsProgram": "Programme Enfants",
+    "noClasses": "Aucun cours prévu pour ce jour",
+    "tryChanging": "Essayez de changer votre sélection de filtre",
+    "locations": "Lieux d'entraînement",
+    "registerNow": "S'inscrire maintenant",
+    "classFull": "Cours complet",
+    "registerFor": "S'inscrire pour",
+    "cancel": "Annuler",
+    "completeRegistration": "Compléter l'inscription"
+  },
+  "testimonials": {
+    "title": "Histoires de Réussite",
+    "subtitle": "Découvrez les transformations que nos clients ont réalisées avec les conseils de Coach Ibra",
+    "before": "AVANT",
+    "after": "APRÈS",
+    "client": "Client",
+    "joinCommunity": "Rejoignez notre communauté et commencez votre parcours de transformation dès aujourd'hui!"
+  },
+  "social": {
+    "followCoach": "Suivez Coach Ibra",
+    "instagram": "Instagram",
+    "youtube": "YouTube",
+    "followOn": "Suivre sur Instagram",
+    "subscribeOn": "S'abonner sur YouTube",
+    "views": "vues",
+    "likes": "j'aime",
+    "view": "Voir",
+    "watch": "Regarder"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Vous avez des questions sur l'entraînement ou vous souhaitez réserver une séance? Remplissez le formulaire ci-dessous et Coach Ibra vous recontactera bientôt.",
+    "contactInfo": "Informations de Contact",
+    "location": "Emplacement",
+    "email": "Email",
+    "phone": "Téléphone",
+    "followCoach": "Suivez Coach Ibra",
+    "sendMessage": "Envoyer un Message",
+    "name": "Nom",
+    "yourName": "Votre nom",
+    "yourEmail": "Votre adresse email",
+    "yourPhone": "Votre numéro de téléphone",
+    "message": "Message",
+    "howCanHelp": "Comment Coach Ibra peut-il vous aider?",
+    "send": "Envoyer le message"
+  },
+  "footer": {
+    "contactUs": "Contactez-nous",
+    "quickLinks": "Liens Rapides",
+    "stayUpdated": "Restez Informé",
+    "newsletterText": "Abonnez-vous à notre newsletter pour des conseils d'entraînement et des mises à jour.",
+    "yourEmail": "Votre email",
+    "subscribe": "S'abonner",
+    "allRightsReserved": "Tous droits réservés.",
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsOfService": "Conditions d'Utilisation"
+  },
+  "admin": {
+    "dashboard": "Tableau de Bord",
+    "clients": "Clients",
+    "schedule": "Planning",
+    "programs": "Programmes",
+    "messages": "Messages",
+    "media": "Médias",
+    "analytics": "Analyses",
+    "settings": "Paramètres",
+    "administration": "Administration",
+    "backToWebsite": "Retour au Site",
+    "myAccount": "Mon Compte",
+    "profile": "Profil",
+    "logout": "Déconnexion",
+    "totalClients": "Total Clients",
+    "classesThisWeek": "Cours Cette Semaine",
+    "newMessages": "Nouveaux Messages",
+    "revenue": "Revenus",
+    "recentClients": "Clients Récents",
+    "latestRegistrations": "Dernières inscriptions client",
+    "upcomingClasses": "Cours à Venir",
+    "next24Hours": "Prochaines 24 heures",
+    "addClient": "Ajouter un Client",
+    "searchClients": "Rechercher des clients...",
+    "export": "Exporter",
+    "filter": "Filtrer",
+    "showing": "Affichage",
+    "to": "à",
+    "of": "sur",
+    "results": "résultats",
+    "previous": "Précédent",
+    "next": "Suivant"
+  },
+  "classRegistration": {
+    "registerForClass": "S'inscrire à un Cours",
+    "fillOutForm": "Remplissez le formulaire ci-dessous pour vous inscrire à l'un des cours de Coach Ibra.",
+    "fullName": "Nom Complet",
+    "email": "Email",
+    "phoneNumber": "Numéro de Téléphone",
+    "program": "Programme",
+    "selectProgram": "Sélectionnez un programme",
+    "date": "Date",
+    "time": "Heure",
+    "experienceLevel": "Niveau d'Expérience",
+    "selectExperience": "Sélectionnez votre niveau d'expérience",
+    "beginner": "Débutant",
+    "intermediate": "Intermédiaire",
+    "advanced": "Avancé",
+    "additionalNotes": "Notes Supplémentaires",
+    "specialRequirements": "Des exigences particulières ou des questions?",
+    "optional": "Optionnel: Faites-nous savoir si vous avez des exigences particulières ou des questions.",
+    "cancel": "Annuler",
+    "register": "S'inscrire"
+  },
+  "login": {
+    "title": "Connexion à Coach Ibra",
+    "email": "Email",
+    "emailPlaceholder": "votre.email@exemple.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "••••••••",
+    "forgotPassword": "Mot de passe oublié ?",
+    "login": "Se connecter",
+    "loggingIn": "Connexion en cours...",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "signUp": "S'inscrire"
+  }
+}

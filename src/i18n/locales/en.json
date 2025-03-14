@@ -1,0 +1,184 @@
+{
+  "header": {
+    "home": "Home",
+    "services": "Services",
+    "schedule": "Schedule",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "bookNow": "Book Now"
+  },
+  "hero": {
+    "title": "Coach Ibra",
+    "tagline": "Take care of your body, it's the only place you're obligated to live",
+    "personalTraining": "Personal Training",
+    "groupClasses": "Group Classes",
+    "kidsProgram": "Kids Program"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Coach Ibra offers a variety of training programs to help you achieve your fitness goals, whether you're looking for personal attention, group motivation, or programs for your children.",
+    "personalTraining": {
+      "title": "Personal Training",
+      "description": "One-on-one training sessions tailored to your specific fitness goals and needs.",
+      "pricing": [
+        "Single Session: €60",
+        "5 Sessions Package: €275 (€55/session)",
+        "10 Sessions Package: €500 (€50/session)",
+        "Monthly Unlimited (3x/week): €550"
+      ],
+      "viewPricing": "View Pricing"
+    },
+    "groupClasses": {
+      "title": "Group Classes",
+      "description": "High-energy group sessions focusing on boxing techniques, conditioning, and teamwork.",
+      "pricing": [
+        "Drop-in Class: €25",
+        "5 Class Card: €110 (€22/class)",
+        "10 Class Card: €200 (€20/class)",
+        "Monthly Unlimited: €220"
+      ],
+      "viewPricing": "View Pricing"
+    },
+    "kidsProgram": {
+      "title": "Kids Program",
+      "description": "Fun and engaging boxing classes designed specifically for children ages 7-14.",
+      "pricing": [
+        "Single Class: €20",
+        "5 Class Card: €90 (€18/class)",
+        "10 Class Card: €160 (€16/class)",
+        "Monthly Unlimited (2x/week): €150"
+      ],
+      "viewPricing": "View Pricing"
+    }
+  },
+  "schedule": {
+    "title": "Weekly Schedule",
+    "subtitle": "Find the perfect class that fits your schedule. Filter by program type and register directly.",
+    "filterBy": "Filter by:",
+    "allClasses": "All Classes",
+    "personalTraining": "Personal Training",
+    "groupClasses": "Group Classes",
+    "kidsProgram": "Kids Program",
+    "noClasses": "No classes scheduled for this day",
+    "tryChanging": "Try changing your filter selection",
+    "locations": "Training Locations",
+    "registerNow": "Register Now",
+    "classFull": "Class Full",
+    "registerFor": "Register for",
+    "cancel": "Cancel",
+    "completeRegistration": "Complete Registration"
+  },
+  "testimonials": {
+    "title": "Success Stories",
+    "subtitle": "See the transformations our clients have achieved with Coach Ibra's guidance",
+    "before": "BEFORE",
+    "after": "AFTER",
+    "client": "Client",
+    "joinCommunity": "Join our community and start your transformation journey today!"
+  },
+  "social": {
+    "followCoach": "Follow Coach Ibra",
+    "instagram": "Instagram",
+    "youtube": "YouTube",
+    "followOn": "Follow on Instagram",
+    "subscribeOn": "Subscribe on YouTube",
+    "views": "views",
+    "likes": "likes",
+    "view": "View",
+    "watch": "Watch"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Have questions about training or want to book a session? Fill out the form below and Coach Ibra will get back to you soon.",
+    "contactInfo": "Contact Information",
+    "location": "Location",
+    "email": "Email",
+    "phone": "Phone",
+    "followCoach": "Follow Coach Ibra",
+    "sendMessage": "Send a Message",
+    "name": "Name",
+    "yourName": "Your name",
+    "yourEmail": "Your email address",
+    "yourPhone": "Your phone number",
+    "message": "Message",
+    "howCanHelp": "How can Coach Ibra help you?",
+    "send": "Send Message"
+  },
+  "footer": {
+    "contactUs": "Contact Us",
+    "quickLinks": "Quick Links",
+    "stayUpdated": "Stay Updated",
+    "newsletterText": "Subscribe to our newsletter for training tips and updates.",
+    "yourEmail": "Your email",
+    "subscribe": "Subscribe",
+    "allRightsReserved": "All rights reserved.",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "clients": "Clients",
+    "schedule": "Schedule",
+    "programs": "Programs",
+    "messages": "Messages",
+    "media": "Media",
+    "analytics": "Analytics",
+    "settings": "Settings",
+    "administration": "Administration",
+    "backToWebsite": "Back to Website",
+    "myAccount": "My Account",
+    "profile": "Profile",
+    "logout": "Log out",
+    "totalClients": "Total Clients",
+    "classesThisWeek": "Classes This Week",
+    "newMessages": "New Messages",
+    "revenue": "Revenue",
+    "recentClients": "Recent Clients",
+    "latestRegistrations": "Latest client registrations",
+    "upcomingClasses": "Upcoming Classes",
+    "next24Hours": "Next 24 hours",
+    "addClient": "Add Client",
+    "searchClients": "Search clients...",
+    "export": "Export",
+    "filter": "Filter",
+    "showing": "Showing",
+    "to": "to",
+    "of": "of",
+    "results": "results",
+    "previous": "Previous",
+    "next": "Next"
+  },
+  "classRegistration": {
+    "registerForClass": "Register for a Class",
+    "fillOutForm": "Fill out the form below to register for one of Coach Ibra's classes.",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phoneNumber": "Phone Number",
+    "program": "Program",
+    "selectProgram": "Select a program",
+    "date": "Date",
+    "time": "Time",
+    "experienceLevel": "Experience Level",
+    "selectExperience": "Select your experience level",
+    "beginner": "Beginner",
+    "intermediate": "Intermediate",
+    "advanced": "Advanced",
+    "additionalNotes": "Additional Notes",
+    "specialRequirements": "Any special requirements or questions?",
+    "optional": "Optional: Let us know if you have any special requirements or questions.",
+    "cancel": "Cancel",
+    "register": "Register"
+  },
+  "login": {
+    "title": "Login to Coach Ibra",
+    "email": "Email",
+    "emailPlaceholder": "your.email@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "forgotPassword": "Forgot password?",
+    "login": "Login",
+    "loggingIn": "Logging in...",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up"
+  }
+}
