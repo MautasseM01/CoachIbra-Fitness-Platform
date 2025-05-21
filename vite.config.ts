@@ -12,7 +12,9 @@ if (process.env.TEMPO === "true") {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === "development" ? "/" : process.env.VITE_BASE_PATH || "/",
+  root: path.resolve(__dirname, './CoachIbra-Fitness-Platform'), // Set the root to the correct directory
+  publicDir: path.resolve(__dirname, './public'), // Correct the public directory path
+  base: process.env.VITE_BASE_URL || '/', // Use the VITE_BASE_URL environment variable
   optimizeDeps: {
     entries: ["src/main.tsx", "src/tempobook/**/*"],
   },
@@ -29,7 +31,7 @@ export default defineConfig({
     },
   },
   server: {
-    // @ts-ignore
-    allowedHosts: true,
+    port: 5174, // Explicitly set the port
+    host: '0.0.0.0', // Bind to all network interfaces
   }
 });

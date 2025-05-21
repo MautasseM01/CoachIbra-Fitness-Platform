@@ -149,7 +149,7 @@ const MediaPage = () => {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
                 <Input
-                  placeholder={t("admin.searchMedia") || "Search media..."}
+                  placeholder={Array.isArray(t("admin.searchMedia")) ? (t("admin.searchMedia") as string[]).join(', ') : (t("admin.searchMedia") as string) || "Search media..."}
                   className="pl-10"
                 />
               </div>

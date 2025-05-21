@@ -46,11 +46,23 @@ const ContactSection = ({
     },
   });
 
-  const onSubmit = (data: ContactFormValues) => {
-    // This would be replaced with actual form submission logic
-    console.log("Form submitted:", data);
-    alert("Thank you for your message! Coach Ibra will contact you soon.");
-    form.reset();
+  const onSubmit = async (data: ContactFormValues) => {
+    try {
+      const response = await fetch("http://localhost:8000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      if (result.status === "success") {
+        alert("Merci pour votre message ! Coach Ibra vous contactera bientôt.");
+        form.reset();
+      } else {
+        alert("Une erreur est survenue. Veuillez réessayer.");
+      }
+    } catch (error) {
+      alert("Erreur de connexion au serveur. Veuillez réessayer.");
+    }
   };
 
   return (

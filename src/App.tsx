@@ -1,8 +1,9 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect, useState } from "react";
 import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import routes from "tempo-routes";
 import LoginPage from "./components/LoginPage";
+import { fetchSampleData, fetchHomeData } from './lib/apiService';
 
 // Admin components with lazy loading
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
@@ -15,9 +16,40 @@ function App() {
   const MessagesPage = lazy(() => import("./components/admin/MessagesPage"));
   const MediaPage = lazy(() => import("./components/admin/MediaPage"));
 
+  const [sampleData, setSampleData] = useState<string | null>(null);
+  const [homeData, setHomeData] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchSampleData();
+        setSampleData(data.message);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchHomeData();
+        setHomeData(data.message);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <Suspense fallback={<p>Loading...</p>}>
       <>
+        <p>{homeData ? homeData : 'Loading data from backend...'}</p>
+        <p>{sampleData ? sampleData : 'Loading data from backend...'}</p>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { supabase } from "../lib/supabase";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -53,42 +52,15 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
     setErrorMessage(null);
 
     try {
-      // For development without Supabase configured
-      if (!supabase || !supabase.auth) {
-        console.log("Supabase not configured, using mock login");
-        // Mock successful login for development
-        if (
-          values.email === "admin@example.com" &&
-          values.password === "password123"
-        ) {
-          if (onLoginSuccess) {
-            onLoginSuccess();
-          } else {
-            navigate("/admin");
-          }
-        } else {
-          throw new Error(
-            "Invalid credentials. For testing, use admin@example.com / password123",
-          );
-        }
+      // Mock login logic (replace with actual backend logic if needed)
+      if (values.email === "test@example.com" && values.password === "password") {
+        if (onLoginSuccess) onLoginSuccess();
+        navigate("/dashboard");
       } else {
-        // Real Supabase authentication
-        const { data, error: authError } =
-          await supabase.auth.signInWithPassword({
-            email: values.email,
-            password: values.password,
-          });
-
-        if (authError) throw authError;
-
-        if (onLoginSuccess) {
-          onLoginSuccess();
-        } else {
-          navigate("/admin");
-        }
+        throw new Error("Invalid email or password");
       }
-    } catch (err: any) {
-      setErrorMessage(err.message || "Failed to login. Please try again.");
+    } catch (error: any) {
+      setErrorMessage(error.message);
     } finally {
       setIsLoading(false);
     }

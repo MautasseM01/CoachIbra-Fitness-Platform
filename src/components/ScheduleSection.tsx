@@ -1,108 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./ui/tabs";
 import { Button } from "./ui/button";
 import { MapPin, Calendar, Clock, Users, Filter } from "lucide-react";
 
 interface ScheduleItem {
-  id: string;
+  id: number | string;
   day: string;
   time: string;
-  program: "personal" | "group" | "kids";
-  title: string;
+  program: string;
+  title?: string;
   location: string;
-  maxParticipants: number;
-  currentParticipants: number;
-  trainer: string;
+  maxParticipants?: number;
+  currentParticipants?: number;
+  trainer?: string;
 }
 
-interface ScheduleSectionProps {
-  scheduleItems?: ScheduleItem[];
-}
-
-const ScheduleSection: React.FC<ScheduleSectionProps> = ({
-  scheduleItems = [
-    {
-      id: "1",
-      day: "Monday",
-      time: "09:00 - 10:30",
-      program: "personal",
-      title: "Boxing Fundamentals",
-      location: "Nice Central Gym",
-      maxParticipants: 1,
-      currentParticipants: 0,
-      trainer: "Coach Ibra",
-    },
-    {
-      id: "2",
-      day: "Monday",
-      time: "17:00 - 18:30",
-      program: "group",
-      title: "Boxing Circuit Training",
-      location: "Nice Central Gym",
-      maxParticipants: 10,
-      currentParticipants: 6,
-      trainer: "Coach Ibra",
-    },
-    {
-      id: "3",
-      day: "Tuesday",
-      time: "16:00 - 17:00",
-      program: "kids",
-      title: "Kids Boxing Basics",
-      location: "Nice Youth Center",
-      maxParticipants: 8,
-      currentParticipants: 5,
-      trainer: "Coach Ibra",
-    },
-    {
-      id: "4",
-      day: "Wednesday",
-      time: "09:00 - 10:30",
-      program: "personal",
-      title: "Advanced Boxing Techniques",
-      location: "Nice Central Gym",
-      maxParticipants: 1,
-      currentParticipants: 0,
-      trainer: "Coach Ibra",
-    },
-    {
-      id: "5",
-      day: "Thursday",
-      time: "18:00 - 19:30",
-      program: "group",
-      title: "Boxing Fitness",
-      location: "Nice Beach Club",
-      maxParticipants: 12,
-      currentParticipants: 8,
-      trainer: "Coach Ibra",
-    },
-    {
-      id: "6",
-      day: "Friday",
-      time: "16:00 - 17:00",
-      program: "kids",
-      title: "Kids Boxing Games",
-      location: "Nice Youth Center",
-      maxParticipants: 8,
-      currentParticipants: 4,
-      trainer: "Coach Ibra",
-    },
-    {
-      id: "7",
-      day: "Saturday",
-      time: "10:00 - 11:30",
-      program: "group",
-      title: "Weekend Boxing Workout",
-      location: "Nice Central Gym",
-      maxParticipants: 15,
-      currentParticipants: 12,
-      trainer: "Coach Ibra",
-    },
-  ],
-}) => {
+const ScheduleSection: React.FC = () => {
+  const [scheduleItems, setScheduleItems] = useState<ScheduleItem[]>([]);
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [showRegistrationForm, setShowRegistrationForm] = useState(false);
   const [selectedClass, setSelectedClass] = useState<ScheduleItem | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/schedule")
+      .then((res) => res.json())
+      .then((data) => {
+        setScheduleItems(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setScheduleItems([]);
+        setLoading(false);
+      });
+  }, []);
 
   const days = [
     "Monday",
@@ -215,95 +146,98 @@ const ScheduleSection: React.FC<ScheduleSectionProps> = ({
             type and register directly.
           </p>
         </div>
+        {loading ? (
+          <div className="text-center text-gray-500">Chargement...</div>
+        ) : (
+          <>
+            <div className="mb-8 flex flex-wrap items-center justify-center gap-4">
+              <div className="flex items-center gap-2">
+                <Filter className="h-5 w-5 text-gray-500" />
+                <span className="font-medium">Filter by:</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  variant={activeFilter === "all" ? "default" : "outline"}
+                  onClick={() => setActiveFilter("all")}
+                >
+                  All Classes
+                </Button>
+                <Button
+                  variant={activeFilter === "personal" ? "default" : "outline"}
+                  onClick={() => setActiveFilter("personal")}
+                >
+                  Personal Training
+                </Button>
+                <Button
+                  variant={activeFilter === "group" ? "default" : "outline"}
+                  onClick={() => setActiveFilter("group")}
+                >
+                  Group Classes
+                </Button>
+                <Button
+                  variant={activeFilter === "kids" ? "default" : "outline"}
+                  onClick={() => setActiveFilter("kids")}
+                >
+                  Kids Program
+                </Button>
+              </div>
+            </div>
 
-        <div className="mb-8 flex flex-wrap items-center justify-center gap-4">
-          <div className="flex items-center gap-2">
-            <Filter className="h-5 w-5 text-gray-500" />
-            <span className="font-medium">Filter by:</span>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <Button
-              variant={activeFilter === "all" ? "default" : "outline"}
-              onClick={() => setActiveFilter("all")}
-            >
-              All Classes
-            </Button>
-            <Button
-              variant={activeFilter === "personal" ? "default" : "outline"}
-              onClick={() => setActiveFilter("personal")}
-            >
-              Personal Training
-            </Button>
-            <Button
-              variant={activeFilter === "group" ? "default" : "outline"}
-              onClick={() => setActiveFilter("group")}
-            >
-              Group Classes
-            </Button>
-            <Button
-              variant={activeFilter === "kids" ? "default" : "outline"}
-              onClick={() => setActiveFilter("kids")}
-            >
-              Kids Program
-            </Button>
-          </div>
-        </div>
+            <Tabs defaultValue="Monday" className="w-full">
+              <TabsList className="mb-8 flex flex-wrap justify-center w-full bg-transparent">
+                {days.map((day) => (
+                  <TabsTrigger
+                    key={day}
+                    value={day}
+                    className="px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white"
+                  >
+                    {day}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
 
-        <Tabs defaultValue="Monday" className="w-full">
-          <TabsList className="mb-8 flex flex-wrap justify-center w-full bg-transparent">
-            {days.map((day) => (
-              <TabsTrigger
-                key={day}
-                value={day}
-                className="px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white"
-              >
-                {day}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          {days.map((day) => (
-            <TabsContent
-              key={day}
-              value={day}
-              className="focus-visible:outline-none focus-visible:ring-0"
-            >
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100">
-                <div className="grid grid-cols-1 divide-y divide-gray-200">
-                  {filteredItems.filter((item) => item.day === day).length >
-                  0 ? (
-                    filteredItems
-                      .filter((item) => item.day === day)
-                      .map((item) => (
-                        <div
-                          key={item.id}
-                          className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
-                        >
-                          <div className="flex-1">
-                            <h3 className="text-xl font-semibold mb-2">
-                              {item.title}
-                            </h3>
-                            <div className="flex flex-col gap-2">
-                              <div className="flex items-center gap-2 text-gray-600">
-                                <Clock className="h-4 w-4" />
-                                <span>{item.time}</span>
-                              </div>
-                              <div className="flex items-center gap-2 text-gray-600">
-                                <MapPin className="h-4 w-4" />
-                                <span>{item.location}</span>
-                              </div>
-                              <div className="flex items-center gap-2 text-gray-600">
-                                <Users className="h-4 w-4" />
-                                <span>
-                                  {item.currentParticipants}/
-                                  {item.maxParticipants} participants
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="flex flex-col gap-2">
+              {days.map((day) => (
+                <TabsContent
+                  key={day}
+                  value={day}
+                  className="focus-visible:outline-none focus-visible:ring-0"
+                >
+                  <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100">
+                    <div className="grid grid-cols-1 divide-y divide-gray-200">
+                      {filteredItems.filter((item) => item.day === day).length >
+                      0 ? (
+                        filteredItems
+                          .filter((item) => item.day === day)
+                          .map((item) => (
                             <div
-                              className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
+                              key={item.id}
+                              className="p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+                            >
+                              <div className="flex-1">
+                                <h3 className="text-xl font-semibold mb-2">
+                                  {item.title}
+                                </h3>
+                                <div className="flex flex-col gap-2">
+                                  <div className="flex items-center gap-2 text-gray-600">
+                                    <Clock className="h-4 w-4" />
+                                    <span>{item.time}</span>
+                                  </div>
+                                  <div className="flex items-center gap-2 text-gray-600">
+                                    <MapPin className="h-4 w-4" />
+                                    <span>{item.location}</span>
+                                  </div>
+                                  <div className="flex items-center gap-2 text-gray-600">
+                                    <Users className="h-4 w-4" />
+                                    <span>
+                                      {item.currentParticipants}/
+                                      {item.maxParticipants} participants
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="flex flex-col gap-2">
+                                <div
+                                  className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
                               ${
                                 item.program === "personal"
                                   ? "bg-blue-100 text-blue-900 font-semibold"
@@ -311,45 +245,49 @@ const ScheduleSection: React.FC<ScheduleSectionProps> = ({
                                     ? "bg-green-100 text-green-900 font-semibold"
                                     : "bg-purple-100 text-purple-900 font-semibold"
                               }`}
-                            >
-                              {item.program === "personal"
-                                ? "Personal Training"
-                                : item.program === "group"
-                                  ? "Group Class"
-                                  : "Kids Program"}
+                                >
+                                  {item.program === "personal"
+                                    ? "Personal Training"
+                                    : item.program === "group"
+                                      ? "Group Class"
+                                      : "Kids Program"}
+                                </div>
+                                <Button
+                                  onClick={() => handleRegisterClick(item)}
+                                  disabled={
+                                    item.currentParticipants >=
+                                    item.maxParticipants
+                                  }
+                                  className="whitespace-nowrap"
+                                >
+                                  {item.currentParticipants >=
+                                  item.maxParticipants
+                                    ? "Class Full"
+                                    : "Register Now"}
+                                </Button>
+                              </div>
                             </div>
-                            <Button
-                              onClick={() => handleRegisterClick(item)}
-                              disabled={
-                                item.currentParticipants >= item.maxParticipants
-                              }
-                              className="whitespace-nowrap"
-                            >
-                              {item.currentParticipants >= item.maxParticipants
-                                ? "Class Full"
-                                : "Register Now"}
-                            </Button>
-                          </div>
+                          ))
+                      ) : (
+                        <div className="p-8 text-center text-gray-500">
+                          <Calendar className="h-12 w-12 mx-auto mb-4 text-gray-400" />
+                          <p className="text-lg">
+                            No classes scheduled for this day
+                          </p>
+                          {activeFilter !== "all" && (
+                            <p className="mt-2">
+                              Try changing your filter selection
+                            </p>
+                          )}
                         </div>
-                      ))
-                  ) : (
-                    <div className="p-8 text-center text-gray-500">
-                      <Calendar className="h-12 w-12 mx-auto mb-4 text-gray-400" />
-                      <p className="text-lg">
-                        No classes scheduled for this day
-                      </p>
-                      {activeFilter !== "all" && (
-                        <p className="mt-2">
-                          Try changing your filter selection
-                        </p>
                       )}
                     </div>
-                  )}
-                </div>
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
+                  </div>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </>
+        )}
 
         <div className="mt-12">
           <div className="bg-white rounded-lg shadow-lg p-6 border border-gray-100">
