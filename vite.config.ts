@@ -12,9 +12,9 @@ if (process.env.TEMPO === "true") {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  root: path.resolve(__dirname, './CoachIbra-Fitness-Platform'), // Set the root to the correct directory
-  publicDir: path.resolve(__dirname, './public'), // Correct the public directory path
-  base: process.env.VITE_BASE_URL || '/', // Use the VITE_BASE_URL environment variable
+  root: path.resolve(__dirname, './'), // Set root to the project root
+  publicDir: 'public', // Use relative path for publicDir
+  base: '/', // Ensure base is set to root
   optimizeDeps: {
     entries: ["src/main.tsx", "src/tempobook/**/*"],
   },
