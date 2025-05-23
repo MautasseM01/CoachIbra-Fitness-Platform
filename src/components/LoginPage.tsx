@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useTranslation } from "react-i18next";
+import { supabase } from "../lib/supabaseClient";
 
 import {
   Form,
@@ -17,7 +18,7 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Alert, AlertDescription } from "./ui/alert";
-import { Eye, EyeOff, Lock, Mail } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -38,6 +39,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
+  const [user, setUser] = useState(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,22 +54,31 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
     setErrorMessage(null);
 
     try {
-      // Mock login logic (replace with actual backend logic if needed)
-      if (values.email === "test@example.com" && values.password === "password") {
-        if (onLoginSuccess) onLoginSuccess();
-        navigate("/dashboard");
-      } else {
-        throw new Error("Invalid email or password");
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: values.email,
+        password: values.password,
+      });
+
+      if (error) {
+        console.error("Login error:", error);
+        setErrorMessage(
+          error.message || "Invalid login credentials. Please try again."
+        );
+        throw error;
       }
-    } catch (error: any) {
+
+      setUser(data.user);
+      if (onLoginSuccess) {
+        onLoginSuccess();
+      } else {
+        navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
       setErrorMessage(error.message);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
   };
 
   return (
@@ -95,7 +106,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                     <FormLabel>{t("login.email") || "Email"}</FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input
                           placeholder={
                             t("login.emailPlaceholder") ||
@@ -120,7 +130,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                     <FormLabel>{t("login.password") || "Password"}</FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                         <Input
                           type={showPassword ? "text" : "password"}
                           placeholder={
@@ -132,15 +141,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                         />
                         <button
                           type="button"
-                          onClick={toggleShowPassword}
-                          className="absolute right-3 top-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-                          tabIndex={-1}
+                          className="absolute right-2 top-2 text-gray-500"
+                          onClick={() => setShowPassword(!showPassword)}
                         >
-                          {showPassword ? (
-                            <EyeOff className="h-4 w-4" />
-                          ) : (
-                            <Eye className="h-4 w-4" />
-                          )}
+                          {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                         </button>
                       </div>
                     </FormControl>
@@ -148,15 +152,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                   </FormItem>
                 )}
               />
-
-              <div className="flex items-center justify-between">
-                <a
-                  href="#"
-                  className="text-sm font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
-                >
-                  {t("login.forgotPassword") || "Forgot password?"}
-                </a>
-              </div>
 
               <Button
                 type="submit"
@@ -168,16 +163,21 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                   : t("login.login") || "Login"}
               </Button>
 
-              <div className="text-center text-sm">
-                <span className="text-gray-600 dark:text-gray-400">
-                  {t("login.noAccount") || "Don't have an account?"}{" "}
-                </span>
-                <a
-                  href="/register"
-                  className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+              <div className="mt-4 flex justify-between">
+                <Button
+                  variant="link"
+                  onClick={() => navigate("/signup")}
+                  className="text-sm font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                 >
                   {t("login.signUp") || "Sign up"}
-                </a>
+                </Button>
+                <Button
+                  variant="link"
+                  onClick={() => navigate("/forgot-password")}
+                  className="text-sm font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                >
+                  {t("login.forgotPassword") || "Forgot password?"}
+                </Button>
               </div>
             </form>
           </Form>

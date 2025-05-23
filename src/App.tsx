@@ -3,12 +3,28 @@ import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import routes from "tempo-routes";
 import LoginPage from "./components/LoginPage";
+import SignupPage from "./components/SignupPage";
+import ForgotPasswordPage from "./components/ForgotPasswordPage";
 import { fetchSampleData, fetchHomeData } from './lib/apiService';
+import ReservationPage from './components/ReservationPage';
+import { useAuth } from './hooks/useAuth';
+import DashboardPage from './components/DashboardPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 // Admin components with lazy loading
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
 const Dashboard = lazy(() => import("./components/admin/Dashboard"));
 const ClientsPage = lazy(() => import("./components/admin/ClientsPage"));
+
+function ProtectedRoute({ children, roles }) {
+  const { user } = useAuth();
+
+  if (!user || (roles && !roles.includes(user.role))) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
 
 function App() {
   const SchedulePage = lazy(() => import("./components/admin/SchedulePage"));
@@ -53,9 +69,21 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/reservation" element={<ReservationPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
 
           {/* Admin Routes */}
-          <Route path="/admin" element={<AdminLayout />}>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute roles={["ROLE_ADMIN"]}>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Dashboard />} />
             <Route path="clients" element={<ClientsPage />} />
             <Route path="schedule" element={<SchedulePage />} />
