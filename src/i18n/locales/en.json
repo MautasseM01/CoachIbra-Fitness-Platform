@@ -5,7 +5,13 @@
     "schedule": "Schedule",
     "testimonials": "Testimonials",
     "contact": "Contact",
-    "bookNow": "Book Now"
+    "bookNow": "Book Now",
+    "account": "Account",
+    "adminDashboard": "Admin Dashboard",
+    "logout": "Logout",
+    "loginTooltip": "Sign in to your account",
+    "signupTooltip": "Create a new account",
+    "accountTooltip": "Manage your account"
   },
   "hero": {
     "title": "Coach Ibra",

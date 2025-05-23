@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -147,6 +148,8 @@ const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({
                             {...field}
                             disabled={isLoading}
                             data-testid="email-input"
+                            required
+                            type="email"
                           />
                         </div>
                       </FormControl>
@@ -157,7 +160,7 @@ const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({
 
                 <Button
                   type="submit"
-                  className="w-full bg-blue-700 hover:bg-blue-800"
+                  className="w-full bg-blue-700 hover:bg-blue-800 transition-colors shadow-sm hover:shadow"
                   disabled={isLoading}
                   data-testid="reset-password-button"
                 >
@@ -167,13 +170,13 @@ const ForgotPasswordPage: React.FC<ForgotPasswordPageProps> = ({
                 </Button>
 
                 <div className="text-center text-sm">
-                  <a
-                    href="/login"
-                    className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                  <Link
+                    to="/login"
+                    className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline"
                     data-testid="back-to-login-link"
                   >
                     {t("forgotPassword.backToLogin") || "Back to Login"}
-                  </a>
+                  </Link>
                 </div>
               </form>
             </Form>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -81,10 +81,18 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
 
         if (authError) throw authError;
 
+        // Check user role from metadata
+        const role = data.user?.user_metadata?.role || "ROLE_USER";
+
         if (onLoginSuccess) {
           onLoginSuccess();
         } else {
-          navigate("/admin");
+          // Redirect based on role
+          if (role === "ROLE_ADMIN") {
+            navigate("/admin");
+          } else {
+            navigate("/"); // Redirect to home for regular users
+          }
         }
       }
     } catch (err: any) {
@@ -132,6 +140,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                           className="pl-10"
                           {...field}
                           disabled={isLoading}
+                          required
+                          type="email"
                         />
                       </div>
                     </FormControl>
@@ -157,6 +167,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                           className="pl-10"
                           {...field}
                           disabled={isLoading}
+                          required
                         />
                         <button
                           type="button"
@@ -178,17 +189,17 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
               />
 
               <div className="flex items-center justify-between">
-                <a
-                  href="#"
-                  className="text-sm font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                <Link
+                  to="/forgot-password"
+                  className="text-sm font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline"
                 >
                   {t("login.forgotPassword") || "Forgot password?"}
-                </a>
+                </Link>
               </div>
 
               <Button
                 type="submit"
-                className="w-full bg-blue-700 hover:bg-blue-800"
+                className="w-full bg-blue-700 hover:bg-blue-800 transition-colors shadow-sm hover:shadow"
                 disabled={isLoading}
               >
                 {isLoading
@@ -200,12 +211,12 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess }) => {
                 <span className="text-gray-600 dark:text-gray-400">
                   {t("login.noAccount") || "Don't have an account?"}{" "}
                 </span>
-                <a
-                  href="/register"
-                  className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                <Link
+                  to="/register"
+                  className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline"
                 >
                   {t("login.signUp") || "Sign up"}
-                </a>
+                </Link>
               </div>
             </form>
           </Form>

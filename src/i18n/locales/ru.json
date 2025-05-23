@@ -5,7 +5,13 @@
     "schedule": "Расписание",
     "testimonials": "Отзывы",
     "contact": "Контакты",
-    "bookNow": "Записаться"
+    "bookNow": "Записаться",
+    "account": "Аккаунт",
+    "adminDashboard": "Панель администратора",
+    "logout": "Выйти",
+    "loginTooltip": "Войти в аккаунт",
+    "signupTooltip": "Создать новый аккаунт",
+    "accountTooltip": "Управление аккаунтом"
   },
   "hero": {
     "title": "Тренер Ибра",
@@ -180,5 +186,31 @@
     "loggingIn": "Вход...",
     "noAccount": "Нет аккаунта?",
     "signUp": "Зарегистрироваться"
+  },
+  "signup": {
+    "title": "Создать аккаунт",
+    "name": "Полное имя",
+    "namePlaceholder": "Иван Иванов",
+    "email": "Email",
+    "emailPlaceholder": "ваш.email@пример.com",
+    "password": "Пароль",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "Подтвердите пароль",
+    "confirmPasswordPlaceholder": "••••••••",
+    "signUp": "Зарегистрироваться",
+    "signingUp": "Регистрация...",
+    "haveAccount": "Уже есть аккаунт?",
+    "login": "Войти",
+    "checkEmail": "Пожалуйста, проверьте вашу электронную почту для подтверждения регистрации"
+  },
+  "forgotPassword": {
+    "title": "Забыли пароль",
+    "description": "Введите ваш email для получения ссылки на сброс пароля",
+    "email": "Email",
+    "emailPlaceholder": "ваш.email@пример.com",
+    "sendResetLink": "Отправить ссылку",
+    "sending": "Отправка...",
+    "successMessage": "Письмо для сброса пароля отправлено! Проверьте вашу почту.",
+    "backToLogin": "Вернуться к входу"
   }
 }

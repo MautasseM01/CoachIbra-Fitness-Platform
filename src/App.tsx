@@ -3,6 +3,8 @@ import { useRoutes, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./components/home";
 import routes from "tempo-routes";
 import LoginPage from "./components/LoginPage";
+import SignupPage from "./components/SignupPage";
+import ForgotPasswordPage from "./components/ForgotPasswordPage";
 
 // Admin components with lazy loading
 const AdminLayout = lazy(() => import("./components/admin/AdminLayout"));
@@ -21,6 +23,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<SignupPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminLayout />}>

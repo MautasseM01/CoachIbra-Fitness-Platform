@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -49,6 +49,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -63,6 +64,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (isSuccess) return; // Prevent multiple submissions after success
     setIsLoading(true);
     setErrorMessage(null);
 
@@ -91,6 +93,10 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
         });
 
         if (authError) throw authError;
+
+        // Show success message
+        setErrorMessage(null);
+        setIsSuccess(true);
 
         if (onSignupSuccess) {
           onSignupSuccess();
@@ -131,6 +137,15 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
             </Alert>
           )}
 
+          {isSuccess && (
+            <Alert className="mb-6 bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-900">
+              <AlertDescription className="text-green-800 dark:text-green-300">
+                {t("signup.checkEmail") ||
+                  "Please check your email for confirmation link"}
+              </AlertDescription>
+            </Alert>
+          )}
+
           <Form {...form}>
             <form
               onSubmit={form.handleSubmit(onSubmit)}
@@ -152,8 +167,9 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
                           }
                           className="pl-10"
                           {...field}
-                          disabled={isLoading}
+                          disabled={isLoading || isSuccess}
                           data-testid="name-input"
+                          required
                         />
                       </div>
                     </FormControl>
@@ -178,8 +194,10 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
                           }
                           className="pl-10"
                           {...field}
-                          disabled={isLoading}
+                          disabled={isLoading || isSuccess}
                           data-testid="email-input"
+                          required
+                          type="email"
                         />
                       </div>
                     </FormControl>
@@ -204,8 +222,9 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
                           }
                           className="pl-10"
                           {...field}
-                          disabled={isLoading}
+                          disabled={isLoading || isSuccess}
                           data-testid="password-input"
+                          required
                         />
                         <button
                           type="button"
@@ -244,8 +263,9 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
                           }
                           className="pl-10"
                           {...field}
-                          disabled={isLoading}
+                          disabled={isLoading || isSuccess}
                           data-testid="confirm-password-input"
+                          required
                         />
                         <button
                           type="button"
@@ -268,8 +288,8 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
 
               <Button
                 type="submit"
-                className="w-full bg-blue-700 hover:bg-blue-800"
-                disabled={isLoading}
+                className="w-full bg-blue-700 hover:bg-blue-800 transition-colors shadow-sm hover:shadow"
+                disabled={isLoading || isSuccess}
                 data-testid="signup-button"
               >
                 {isLoading
@@ -281,13 +301,13 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSignupSuccess }) => {
                 <span className="text-gray-600 dark:text-gray-400">
                   {t("signup.haveAccount") || "Already have an account?"}{" "}
                 </span>
-                <a
-                  href="/login"
-                  className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                <Link
+                  to="/login"
+                  className="font-medium text-blue-700 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 hover:underline"
                   data-testid="login-link"
                 >
                   {t("signup.login") || "Login"}
-                </a>
+                </Link>
               </div>
             </form>
           </Form>

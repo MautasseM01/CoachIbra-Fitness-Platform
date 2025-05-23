@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
@@ -7,6 +7,9 @@ import { ThemeProvider } from "./components/ThemeProvider";
 
 // Import i18n configuration
 import "./i18n";
+
+// Initialize Supabase auth listener
+import { supabase } from "./lib/supabase";
 
 import { TempoDevtools } from "tempo-devtools";
 TempoDevtools.init();

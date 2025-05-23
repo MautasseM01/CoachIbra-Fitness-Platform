@@ -5,7 +5,13 @@
     "schedule": "Horaires",
     "testimonials": "Témoignages",
     "contact": "Contact",
-    "bookNow": "Réserver"
+    "bookNow": "Réserver",
+    "account": "Compte",
+    "adminDashboard": "Tableau de Bord Admin",
+    "logout": "Déconnexion",
+    "loginTooltip": "Connectez-vous à votre compte",
+    "signupTooltip": "Créez un nouveau compte",
+    "accountTooltip": "Gérez votre compte"
   },
   "hero": {
     "title": "Coach Ibra",
@@ -180,5 +186,31 @@
     "loggingIn": "Connexion en cours...",
     "noAccount": "Vous n'avez pas de compte ?",
     "signUp": "S'inscrire"
+  },
+  "signup": {
+    "title": "Créer un compte",
+    "name": "Nom complet",
+    "namePlaceholder": "Jean Dupont",
+    "email": "Email",
+    "emailPlaceholder": "votre.email@exemple.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "••••••••",
+    "confirmPassword": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "••••••••",
+    "signUp": "S'inscrire",
+    "signingUp": "Inscription en cours...",
+    "haveAccount": "Vous avez déjà un compte ?",
+    "login": "Se connecter",
+    "checkEmail": "Veuillez vérifier votre email pour confirmer votre inscription"
+  },
+  "forgotPassword": {
+    "title": "Mot de passe oublié",
+    "description": "Entrez votre email pour recevoir un lien de réinitialisation",
+    "email": "Email",
+    "emailPlaceholder": "votre.email@exemple.com",
+    "sendResetLink": "Envoyer le lien",
+    "sending": "Envoi en cours...",
+    "successMessage": "Email de réinitialisation envoyé ! Vérifiez votre boîte de réception.",
+    "backToLogin": "Retour à la connexion"
   }
 }
